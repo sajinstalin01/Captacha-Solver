@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Rolex CAPTCHA Lab Test Fixture</title></head>
+<body>
+  <h1>Local detector fixture</h1>
+  <p>Only synthetic markers are included. This page does not contact CAPTCHA providers.</p>
+  <div class="g-recaptcha" aria-label="Synthetic reCAPTCHA marker">Synthetic reCAPTCHA marker</div>
+  <div class="h-captcha" aria-label="Synthetic hCaptcha marker">Synthetic hCaptcha marker</div>
+  <div class="cf-turnstile" aria-label="Synthetic Turnstile marker">Synthetic Turnstile marker</div>
+  <input aria-label="captcha" placeholder="Enter synthetic verification code">
+  <button id="add">Add dynamic synthetic marker</button>
+  <script>
+    document.getElementById("add").addEventListener("click", () => {
+      const node = document.createElement("div");
+      node.className = "g-recaptcha";
+      node.textContent = "Dynamically inserted synthetic marker";
+      document.body.append(node);
+    });
+  </script>
+</body>
+</html>
