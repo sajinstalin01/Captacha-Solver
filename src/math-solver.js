@@ -16,7 +16,7 @@
   function parse(input) {
     const text = normalize(input);
     // Accept a simple two-operand arithmetic expression, optionally followed by = ?.
-    const match = text.match(/^(-?\d+(?:\.\d+)?)\s*([+*/-])\s*(-?\d+(?:\.\d+)?)\s*(?:=\s*\??)?$/);
+    const match = text.match(/^(-?\d+(?:\.\d+)?)\s*([+*\\/-])\s*(-?\d+(?:\.\d+)?)\s*(?:=\s*\??)?$/);
     if (!match) return { ok: false, error: "Unsupported expression. Use two numbers and +, −, ×, or ÷." };
 
     const a = Number(match[1]);
