@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Rolex CAPTCHA Lab",
+  "version": "0.1.0",
+  "description": "Privacy-first CAPTCHA detection, classification, and accessibility testing tools.",
+  "permissions": ["storage", "activeTab"],
+  "action": {
+    "default_title": "Rolex CAPTCHA Lab",
+    "default_popup": "popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["src/detector.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "rolex-captcha-lab@sajinstalin01.github.io",
+      "strict_min_version": "109.0"
+    }
+  }
+}
