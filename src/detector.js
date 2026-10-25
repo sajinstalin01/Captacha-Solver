@@ -14,8 +14,10 @@
   ];
 
   function describe(el) {
-    const attrs = ["id", "class", "src", "title", "aria-label", "name", "alt", "data-sitekey"];
-    return [el.tagName, ...attrs.map(a => el.getAttribute?.(a) || "")].join(" ").slice(0, 1000);
+    const attrs = ["id", "class", "src", "title", "aria-label", "name", "alt", "placeholder", "data-sitekey"];
+    let text = "";
+    try { if (el.children.length < 2) text = (el.textContent || "").slice(0, 160); } catch (_) {}
+    return [el.tagName, ...attrs.map(a => el.getAttribute?.(a) || ""), text].join(" ").slice(0, 1000);
   }
 
   function classify(el) {
