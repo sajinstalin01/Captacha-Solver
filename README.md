@@ -7,11 +7,12 @@ This project identifies CAPTCHA-like widgets and reports their type. It does not
 
 ## MVP features
 - Manifest V3 browser extension foundation
-- Heuristic detection for reCAPTCHA, hCaptcha, Cloudflare Turnstile, image/text CAPTCHA, and unknown challenge widgets
-- MutationObserver-based detection for dynamically loaded widgets
-- Small popup dashboard with detected challenge counts and last scan
+- Heuristic detection for reCAPTCHA, hCaptcha, Cloudflare Turnstile, AWS WAF CAPTCHA, GeeTest, and generic image/text markers
+- MutationObserver-based rescanning for dynamically inserted widgets
+- Popup dashboard with current findings and bounded recent history
+- Synthetic local fixture at `tests/fixture.html` for manual regression checks
 - Privacy-first: no network requests, no image uploads, no tracking
-- Cross-browser packaging guidance
+- MIT license
 
 ## Install for development
 1. Download or clone this repository.
@@ -19,8 +20,14 @@ This project identifies CAPTCHA-like widgets and reports their type. It does not
 3. Enable Developer mode and choose **Load unpacked**; select the repository folder.
 4. For Firefox, open `about:debugging#/runtime/this-firefox`, choose **Load Temporary Add-on**, and select `manifest.json`.
 
+## Test the MVP
+1. Load the extension unpacked using the steps above.
+2. Serve `tests/fixture.html` from a local HTTP server (for example, run `python -m http.server 8000` from the repository root).
+3. Open `http://localhost:8000/tests/fixture.html` and scan it with the extension.
+4. Click **Add dynamic synthetic marker** and scan again to test dynamically inserted markup.
+
 ## Limitations
-Browser stores and extension APIs vary. Firefox support may require a browser-specific manifest/build step as the project grows. Detection is heuristic and may produce false positives/negatives. This is a research MVP, not a universal solver.
+Detection is heuristic and may produce false positives/negatives. The current MVP does not contain OCR or a trained AI solver, and it cannot reliably identify every provider or challenge. Browser APIs and store requirements vary; Firefox support should be validated in a real Firefox install before release. Third-party verification remains user/provider controlled.
 
 ## Roadmap
 - Synthetic CAPTCHA playground for owned test pages
