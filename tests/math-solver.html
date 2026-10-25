@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Rolex CAPTCHA Lab — Math Test Fixture</title>
+  <style>
+    body{font:16px/1.5 system-ui,sans-serif;max-width:720px;margin:3rem auto;padding:0 1rem;background:#101827;color:#eef2ff}
+    main{background:#1b2638;border:1px solid #35445d;border-radius:16px;padding:1.5rem}
+    input,button{font:inherit;padding:.7rem;border-radius:8px;border:1px solid #64748b}
+    input{width:min(100%,22rem);background:#0f172a;color:#fff}button{cursor:pointer;margin-top:.7rem}
+    output{display:block;margin-top:1rem;white-space:pre-wrap;color:#a7f3d0}
+    .note{color:#cbd5e1;font-size:.92rem}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Math CAPTCHA parser — test fixture</h1>
+    <p class="note">For local demonstrations and authorized testing only. This page does not interact with or submit answers to third-party CAPTCHA services.</p>
+    <label for="expression">Arithmetic expression</label><br>
+    <input id="expression" value="7 + 5 = ?" autocomplete="off">
+    <br><button id="solve" type="button">Calculate test expression</button>
+    <output id="result" aria-live="polite">Try 7 + 5, 18 − 6, 4 × 3, or 20 ÷ 4.</output>
+  </main>
+  <script src="../src/math-solver.js"></script>
+  <script>
+    "use strict";
+    const expression = document.querySelector("#expression");
+    const result = document.querySelector("#result");
+    document.querySelector("#solve").addEventListener("click", () => {
+      const parsed = RCLMathCaptcha.parse(expression.value);
+      result.textContent = parsed.ok
+        ? "Parsed: " + parsed.expression + "\nExpected result: " + parsed.answer
+        : parsed.error;
+    });
+  </script>
+</body>
+</html>
