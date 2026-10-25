@@ -15,6 +15,8 @@ This project identifies CAPTCHA-like widgets and reports their type. It does not
 - Separate current-scan results and bounded recent history
 - Popup dashboard with current findings and bounded recent history
 - Synthetic local fixture at `tests/fixture.html` for manual regression checks
+- Safe arithmetic-expression parser for local/authorized test fixtures (addition, subtraction, multiplication, division; no `eval`)
+- Interactive math challenge test page at `tests/math-solver.html`
 - Provider heuristics for reCAPTCHA, hCaptcha, Cloudflare Turnstile, AWS WAF, GeeTest, Arkose Labs/FunCaptcha, KeyCAPTCHA, Friendly Captcha, audio hints, and generic image/text challenges
 - Privacy-first: no network requests, no image uploads, no tracking
 - MIT license
@@ -29,10 +31,10 @@ This project identifies CAPTCHA-like widgets and reports their type. It does not
 1. Load the extension unpacked using the steps above.
 2. Serve `tests/fixture.html` from a local HTTP server (for example, run `python -m http.server 8000` from the repository root).
 3. Open `http://localhost:8000/tests/fixture.html` and scan it with the extension.
-4. Click **Add dynamic synthetic marker** and scan again to test dynamically inserted markup.
+4. Click **Add dynamic synthetic marker** and scan again to test dynamically inserted markup.\n5. Open `http://localhost:8000/tests/math-solver.html` to try the arithmetic parser with sample expressions.
 
 ## Limitations
-Detection is heuristic and may produce false positives/negatives. Cross-origin iframe internals, closed Shadow DOM, and browser-restricted pages cannot be inspected. The current MVP does not contain OCR or a trained AI solver, and it cannot reliably identify every provider or challenge. Browser APIs and store requirements vary; Firefox support should be validated in a real Firefox install before release. Third-party verification remains user/provider controlled.
+Detection is heuristic and may produce false positives/negatives. Cross-origin iframe internals, closed Shadow DOM, and browser-restricted pages cannot be inspected. The arithmetic parser is a small expression calculator for local/authorized fixtures, not a universal CAPTCHA solver. It does not automatically inspect third-party challenge text, fill answer fields, submit forms, bypass verification, or provide OCR/trained image solving. Detection remains heuristic and cannot reliably identify every provider or challenge. Browser APIs and store requirements vary; Firefox support should be validated in a real Firefox install before release. Third-party verification remains user/provider controlled.
 
 ## Roadmap
 - Synthetic CAPTCHA playground for owned test pages
